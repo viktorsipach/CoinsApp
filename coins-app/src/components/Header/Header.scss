@@ -1,0 +1,46 @@
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  font-size: 1.25rem;
+  line-height: inherit;
+  white-space: nowrap;
+  color: #fff;
+  margin-bottom: 1%;
+  background: grey;
+}
+
+.main-coins {
+  width: 33%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  & span {
+    padding-right: 10px;
+    margin-right: 10px;
+    border-right: 1px solid #fff;
+  }
+  & span:last-child {
+    border-right: 0;
+    padding-right: 0;
+    margin-right: 0;
+  }
+}
+
+.portfolio {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.brief-case {
+  display: block;
+  margin-right: 5px;
+}
