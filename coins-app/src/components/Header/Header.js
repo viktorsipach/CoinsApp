@@ -1,11 +1,21 @@
 import { Briefcase } from 'react-bootstrap-icons';
 import './Header.scss';
 import PortfolioModal from '../PortfolioModal/PortfolioModal.js';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { getCoinsTable } from '../../store/actions/coins';
 
 function Header (props) {
+  const { getCoinsTable } = props;
+  const { coinsTableData } = props;
+
   const [show, setShow] = useState(false);
-  const [list, setList] = useState(props.data);
+  const [list, setList] = useState(coinsTableData);
+
+  useEffect(() => {
+    getCoinsTable();
+    // eslint-disable-next-line
+  },[]);
  
   const handleRemove = (id) => {
     const newList = list.filter((item) => item.id !== id);
@@ -17,7 +27,7 @@ function Header (props) {
   return (
     <div className="header">
         <div className="main-coins">
-          {props.data.slice(0,3).map(item => {
+          {coinsTableData.slice(0,3).map(item => {
             return (
               <span key={item.id}>{`${item.name} ${Number(item.priceUsd).toFixed(2)} USD` }</span>
             )
@@ -39,4 +49,16 @@ function Header (props) {
   )
 }
 
-export default Header;
+const mapStateToProps = ({ coinsTableData }) => {
+  return {
+    coinsTableData,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getCoinsTable: () => dispatch(getCoinsTable()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
